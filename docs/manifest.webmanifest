@@ -1,0 +1,17 @@
+{
+  "name": "Mega 6/45 Auto",
+  "short_name": "Mega645",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#eef3fa",
+  "theme_color": "#123d88",
+  "description": "Phân tích Mega 6/45 từ dữ liệu lịch sử",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
