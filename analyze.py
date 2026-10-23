@@ -88,7 +88,7 @@ for seed in pairs[:120]:
     candidates.add(tuple(sorted(nums)))
 sets=sorted(candidates,key=lambda s:(-quality(s),s))[:10]
 fmt=lambda nums:'-'.join(f'{n:02}' for n in nums)
-result={'last_draw':str(history[-1][0]),'target_date':str(target),'stale_days':(today-history[-1][0]).days,'draws':len(history),'weekday_draws':len(same),'source':url+' + '+new_url,'top_pairs':[{'pair':fmt(p),'all':a[p],'weekday':b[p],'recent':c[p],'historical_score_pct':round(score(p)*100,3)} for p in pairs[:30]],'top_sets':[{'numbers':fmt(s),'score':round(quality(s),5)} for s in sets]}
+result={'last_draw':str(history[-1][0]),'target_date':str(target),'stale_days':(today-history[-1][0]).days,'draws':len(history),'weekday_draws':len(same),'source':url+' + '+new_url,'last_five_draws':[{'date':str(d),'numbers':fmt(n)} for d,n in reversed(history[-5:])],'top_pairs':[{'pair':fmt(p),'all':a[p],'weekday':b[p],'recent':c[p],'historical_score_pct':round(score(p)*100,3)} for p in pairs[:30]],'top_sets':[{'numbers':fmt(s),'score':round(quality(s),5)} for s in sets]}
 (docs/'results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8')
 rows=''.join('<tr><td>'+str(i)+'</td><td>'+x['pair']+'</td><td>'+str(x['all'])+'</td><td>'+str(x['weekday'])+'</td><td>'+str(x['recent'])+'</td><td>'+str(x['historical_score_pct'])+'%</td></tr>' for i,x in enumerate(result['top_pairs'],1))
 sets_html=''.join('<tr><td>'+str(i)+'</td><td>'+x['numbers']+'</td><td>'+str(x['score'])+'</td></tr>' for i,x in enumerate(result['top_sets'],1))
