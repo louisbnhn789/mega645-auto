@@ -29,6 +29,42 @@ for row in csv.DictReader(path.open(encoding='utf-8-sig')):
         if len(nums)==6 and len(set(nums))==6 and 1<=min(nums) and max(nums)<=45:
             draws[(day,nums)]=(day,nums)
     except (ValueError,TypeError,KeyError):pass
+# Merge newer independently maintained NDJSON history. Keep older archive rows.
+new_url='https://raw.githubusercontent.com/vietvudanh/vietlott-data/main/data/power645.jsonl'
+new_path=data/'power645.jsonl'
+try:
+    req=urllib.request.Request(new_url,headers={'User-Agent':'Mega645-Research/1.0'})
+    fresh=urllib.request.urlopen(req,timeout=35).read()
+    lines=[json.loads(line) for line in fresh.decode('utf-8-sig').splitlines() if line.strip()]
+    validated=[]
+    for item in lines:
+        day=datetime.date.fromisoformat(item['date'])
+        nums=tuple(sorted(map(int,item['result'])))
+        draw_id=int(str(item['id']).lstrip('#'))
+        if len(nums)!=6 or len(set(nums))!=6 or not 1<=min(nums)<=max(nums)<=45:
+            raise ValueError('Invalid numbers in upstream NDJSON')
+        validated.append((draw_id,day,nums))
+    if len(validated)<100 or len(set(i for i,d,n in validated))!=len(validated):
+        raise ValueError('Insufficient or duplicate draw IDs')
+    if not new_path.exists() or max(d for i,d,n in validated)>=max(datetime.date.fromisoformat(v['date']) for v in map(json.loads,new_path.read_text(encoding='utf8').splitlines()) if v):
+        new_path.write_bytes(fresh)
+except Exception as exc:
+    print('New source unavailable, using last stored copy:',exc)
+if new_path.exists():
+    for line in new_path.read_text(encoding='utf8').splitlines():
+        try:
+            item=json.loads(line)
+            day=datetime.date.fromisoformat(item['date'])
+            nums=tuple(sorted(map(int,item['result'])))
+            if len(nums)==6 and len(set(nums))==6 and 1<=min(nums)<=max(nums)<=45:
+                old=[key for key in draws if key[0]==day]
+                for key in old:
+                    if key[1]!=nums:
+                        raise ValueError('Source conflict for '+str(day))
+                draws[(day,nums)]=(day,nums)
+        except (ValueError,TypeError,KeyError) as exc:
+            if 'Source conflict' in str(exc):raise
+            print('Skipping malformed new row:',exc)
 history=sorted(draws.values())
 if not history:raise ValueError('No valid draws')
 today=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=7))).date()
@@ -52,7 +88,7 @@ for seed in pairs[:120]:
     candidates.add(tuple(sorted(nums)))
 sets=sorted(candidates,key=lambda s:(-quality(s),s))[:10]
 fmt=lambda nums:'-'.join(f'{n:02}' for n in nums)
-result={'last_draw':str(history[-1][0]),'target_date':str(target),'stale_days':(today-history[-1][0]).days,'draws':len(history),'weekday_draws':len(same),'source':url,'top_pairs':[{'pair':fmt(p),'all':a[p],'weekday':b[p],'recent':c[p],'historical_score_pct':round(score(p)*100,3)} for p in pairs[:30]],'top_sets':[{'numbers':fmt(s),'score':round(quality(s),5)} for s in sets]}
+result={'last_draw':str(history[-1][0]),'target_date':str(target),'stale_days':(today-history[-1][0]).days,'draws':len(history),'weekday_draws':len(same),'source':url+' + '+new_url,'top_pairs':[{'pair':fmt(p),'all':a[p],'weekday':b[p],'recent':c[p],'historical_score_pct':round(score(p)*100,3)} for p in pairs[:30]],'top_sets':[{'numbers':fmt(s),'score':round(quality(s),5)} for s in sets]}
 (docs/'results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8')
 rows=''.join('<tr><td>'+str(i)+'</td><td>'+x['pair']+'</td><td>'+str(x['all'])+'</td><td>'+str(x['weekday'])+'</td><td>'+str(x['recent'])+'</td><td>'+str(x['historical_score_pct'])+'%</td></tr>' for i,x in enumerate(result['top_pairs'],1))
 sets_html=''.join('<tr><td>'+str(i)+'</td><td>'+x['numbers']+'</td><td>'+str(x['score'])+'</td></tr>' for i,x in enumerate(result['top_sets'],1))
