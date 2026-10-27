@@ -27,6 +27,41 @@
       "numbers": "09-20-26-35-36-38"
     }
   ],
+  "method_sets": [
+    {
+      "code": "A",
+      "name": "Tần suất lịch sử",
+      "description": "Ưu tiên số và cặp số xuất hiện nhiều trong toàn bộ lịch sử.",
+      "numbers": "07-10-19-24-37-44",
+      "metrics": {
+        "history": 95.0,
+        "trend": 41.0,
+        "gap": 13.0
+      }
+    },
+    {
+      "code": "B",
+      "name": "Xu hướng gần",
+      "description": "So sánh tần suất 30 và 60 kỳ với nền 150 kỳ gần nhất.",
+      "numbers": "03-06-15-26-27-40",
+      "metrics": {
+        "history": 44.7,
+        "trend": 84.6,
+        "gap": 12.6
+      }
+    },
+    {
+      "code": "C",
+      "name": "Kết hợp",
+      "description": "Kết hợp tần suất lịch sử, xu hướng gần và khoảng cách xuất hiện.",
+      "numbers": "10-20-22-27-37-44",
+      "metrics": {
+        "history": 87.6,
+        "trend": 63.2,
+        "gap": 9.6
+      }
+    }
+  ],
   "top_pairs": [
     {
       "pair": "29-37",
