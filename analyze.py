@@ -88,7 +88,51 @@ for seed in pairs[:120]:
     candidates.add(tuple(sorted(nums)))
 sets=sorted(candidates,key=lambda s:(-quality(s),s))[:10]
 fmt=lambda nums:'-'.join(f'{n:02}' for n in nums)
-result={'last_draw':str(history[-1][0]),'target_date':str(target),'stale_days':(today-history[-1][0]).days,'draws':len(history),'weekday_draws':len(same),'source':url+' + '+new_url,'last_five_draws':[{'date':str(d),'numbers':fmt(n)} for d,n in reversed(history[-5:])],'top_pairs':[{'pair':fmt(p),'all':a[p],'weekday':b[p],'recent':c[p],'historical_score_pct':round(score(p)*100,3)} for p in pairs[:30]],'top_sets':[{'numbers':fmt(s),'score':round(quality(s),5)} for s in sets]}
+# Three transparent, deterministic historical ranking approaches.
+def single_frequency(window):
+    sample=[n for d,n in history[-window:]]
+    freq=collections.Counter(n for draw in sample for n in draw)
+    return {n:(freq[n]+1)/(len(sample)+45/6) for n in range(1,46)}
+f_all=single_frequency(len(history))
+f_30=single_frequency(30)
+f_60=single_frequency(60)
+f_150=single_frequency(150)
+last_seen={n:next((i for i,(_,draw) in enumerate(reversed(history)) if n in draw),len(history)) for n in range(1,46)}
+def norm(vals):
+    low=min(vals.values()); high=max(vals.values())
+    return {n:(v-low)/(high-low) if high>low else .5 for n,v in vals.items()}
+trend=norm({n:.55*(f_30[n]-f_150[n])+.45*(f_60[n]-f_150[n]) for n in range(1,46)})
+freq_norm=norm(f_all)
+gap_norm=norm({n:min(last_seen[n],45) for n in range(1,46)})
+recent_norm=norm({n:.5*f_30[n]+.5*f_60[n] for n in range(1,46)})
+methods=[
+ ('A','Tần suất lịch sử','Ưu tiên số và cặp số xuất hiện nhiều trong toàn bộ lịch sử.',{n:freq_norm[n] for n in range(1,46)},.35),
+ ('B','Xu hướng gần','So sánh tần suất 30 và 60 kỳ với nền 150 kỳ gần nhất.',{n:.7*trend[n]+.3*recent_norm[n] for n in range(1,46)},.15),
+ ('C','Kết hợp','Kết hợp tần suất lịch sử, xu hướng gần và khoảng cách xuất hiện.',{n:.35*freq_norm[n]+.40*trend[n]+.25*gap_norm[n] for n in range(1,46)},.20)
+]
+def choose_set(points,pair_weight,excluded):
+    # Greedy starts from several high-scoring seeds; choose distinct sets for comparison.
+    seeds=sorted(range(1,46),key=lambda n:(-points[n],n))[:18]
+    proposals=set()
+    pairmax=max(score(p) for p in pairs)
+    for seed in seeds:
+        picked=[seed]
+        while len(picked)<6:
+            nxt=max((n for n in range(1,46) if n not in picked),
+                    key=lambda n:(points[n]+pair_weight*sum(score(tuple(sorted((n,k))))/pairmax for k in picked)/max(len(picked),1),-n))
+            picked.append(nxt)
+        proposals.add(tuple(sorted(picked)))
+    def rank(nums):
+        return sum(points[n] for n in nums)+pair_weight*sum(score(p)/pairmax for p in itertools.combinations(nums,2))/15*6
+    ranked=sorted(proposals,key=lambda nums:(-rank(nums),nums))
+    return next((nums for nums in ranked if nums not in excluded),ranked[0])
+method_sets=[]
+used=set()
+for code,name,description,points,weight in methods:
+    chosen=choose_set(points,weight,used)
+    used.add(chosen)
+    method_sets.append({'code':code,'name':name,'description':description,'numbers':fmt(chosen),'metrics':{'history':round(sum(freq_norm[n] for n in chosen)/6*100,1),'trend':round(sum(trend[n] for n in chosen)/6*100,1),'gap':round(sum(gap_norm[n] for n in chosen)/6*100,1)}})
+result={'last_draw':str(history[-1][0]),'target_date':str(target),'stale_days':(today-history[-1][0]).days,'draws':len(history),'weekday_draws':len(same),'source':url+' + '+new_url,'last_five_draws':[{'date':str(d),'numbers':fmt(n)} for d,n in reversed(history[-5:])],'method_sets':method_sets,'top_pairs':[{'pair':fmt(p),'all':a[p],'weekday':b[p],'recent':c[p],'historical_score_pct':round(score(p)*100,3)} for p in pairs[:30]],'top_sets':[{'numbers':fmt(s),'score':round(quality(s),5)} for s in sets]}
 (docs/'results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8')
 rows=''.join('<tr><td>'+str(i)+'</td><td>'+x['pair']+'</td><td>'+str(x['all'])+'</td><td>'+str(x['weekday'])+'</td><td>'+str(x['recent'])+'</td><td>'+str(x['historical_score_pct'])+'%</td></tr>' for i,x in enumerate(result['top_pairs'],1))
 sets_html=''.join('<tr><td>'+str(i)+'</td><td>'+x['numbers']+'</td><td>'+str(x['score'])+'</td></tr>' for i,x in enumerate(result['top_sets'],1))
