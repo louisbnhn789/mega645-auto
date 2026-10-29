@@ -1,7 +1,7 @@
 {
   "last_draw": "2026-10-28",
   "target_date": "2026-10-30",
-  "stale_days": 1,
+  "stale_days": 2,
   "draws": 1581,
   "weekday_draws": 525,
   "source": "https://raw.githubusercontent.com/NhanAZ-Data/vietlott-data-research/main/datasets/draws/mega645/all.csv + https://raw.githubusercontent.com/vietvudanh/vietlott-data/main/data/power645.jsonl",
