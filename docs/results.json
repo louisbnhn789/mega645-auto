@@ -1,11 +1,15 @@
 {
-  "last_draw": "2026-11-18",
-  "target_date": "2026-11-20",
-  "stale_days": 2,
-  "draws": 1590,
-  "weekday_draws": 528,
+  "last_draw": "2026-11-20",
+  "target_date": "2026-11-22",
+  "stale_days": 1,
+  "draws": 1591,
+  "weekday_draws": 531,
   "source": "https://raw.githubusercontent.com/NhanAZ-Data/vietlott-data-research/main/datasets/draws/mega645/all.csv + https://raw.githubusercontent.com/vietvudanh/vietlott-data/main/data/power645.jsonl",
   "last_five_draws": [
+    {
+      "date": "2026-11-20",
+      "numbers": "02-10-12-28-30-32"
+    },
     {
       "date": "2026-11-18",
       "numbers": "06-18-20-27-29-32"
@@ -21,10 +25,6 @@
     {
       "date": "2026-11-11",
       "numbers": "03-11-14-23-25-43"
-    },
-    {
-      "date": "2026-11-08",
-      "numbers": "01-02-14-20-23-36"
     }
   ],
   "method_sets": [
@@ -34,31 +34,31 @@
       "description": "Ưu tiên số và cặp số xuất hiện nhiều trong toàn bộ lịch sử.",
       "numbers": "07-10-22-24-37-44",
       "metrics": {
-        "history": 95.4,
-        "trend": 45.3,
-        "gap": 5.7
+        "history": 95.7,
+        "trend": 47.9,
+        "gap": 5.6
       }
     },
     {
       "code": "B",
       "name": "Xu hướng gần",
       "description": "So sánh tần suất 30 và 60 kỳ với nền 150 kỳ gần nhất.",
-      "numbers": "10-20-26-27-40-41",
+      "numbers": "10-11-27-33-40-41",
       "metrics": {
-        "history": 65.2,
-        "trend": 85.7,
-        "gap": 5.7
+        "history": 62.1,
+        "trend": 83.7,
+        "gap": 7.0
       }
     },
     {
       "code": "C",
       "name": "Kết hợp",
       "description": "Kết hợp tần suất lịch sử, xu hướng gần và khoảng cách xuất hiện.",
-      "numbers": "10-11-20-27-40-41",
+      "numbers": "07-10-11-27-41-44",
       "metrics": {
-        "history": 67.7,
-        "trend": 84.9,
-        "gap": 6.4
+        "history": 81.2,
+        "trend": 69.1,
+        "gap": 7.0
       }
     }
   ],
@@ -68,252 +68,252 @@
       "all": 38,
       "weekday": 13,
       "recent": 8,
-      "historical_score_pct": 2.932
+      "historical_score_pct": 2.924
     },
     {
-      "pair": "10-38",
-      "all": 29,
-      "weekday": 16,
-      "recent": 5,
-      "historical_score_pct": 2.816
-    },
-    {
-      "pair": "41-45",
-      "all": 24,
-      "weekday": 15,
-      "recent": 5,
-      "historical_score_pct": 2.704
-    },
-    {
-      "pair": "02-15",
-      "all": 32,
-      "weekday": 16,
-      "recent": 4,
-      "historical_score_pct": 2.666
-    },
-    {
-      "pair": "06-39",
-      "all": 36,
-      "weekday": 17,
-      "recent": 3,
-      "historical_score_pct": 2.627
-    },
-    {
-      "pair": "19-30",
-      "all": 37,
-      "weekday": 17,
-      "recent": 3,
-      "historical_score_pct": 2.627
-    },
-    {
-      "pair": "19-36",
+      "pair": "01-23",
       "all": 30,
       "weekday": 14,
-      "recent": 5,
-      "historical_score_pct": 2.593
-    },
-    {
-      "pair": "20-22",
-      "all": 33,
-      "weekday": 14,
-      "recent": 5,
-      "historical_score_pct": 2.593
-    },
-    {
-      "pair": "04-17",
-      "all": 25,
-      "weekday": 15,
-      "recent": 4,
-      "historical_score_pct": 2.554
-    },
-    {
-      "pair": "16-41",
-      "all": 31,
-      "weekday": 15,
-      "recent": 4,
-      "historical_score_pct": 2.554
-    },
-    {
-      "pair": "06-20",
-      "all": 29,
-      "weekday": 12,
-      "recent": 6,
-      "historical_score_pct": 2.52
-    },
-    {
-      "pair": "36-43",
-      "all": 30,
-      "weekday": 12,
-      "recent": 6,
-      "historical_score_pct": 2.52
-    },
-    {
-      "pair": "22-44",
-      "all": 33,
-      "weekday": 13,
-      "recent": 5,
-      "historical_score_pct": 2.482
-    },
-    {
-      "pair": "07-38",
-      "all": 20,
-      "weekday": 10,
       "recent": 7,
-      "historical_score_pct": 2.447
-    },
-    {
-      "pair": "01-10",
-      "all": 29,
-      "weekday": 14,
-      "recent": 4,
-      "historical_score_pct": 2.443
-    },
-    {
-      "pair": "27-41",
-      "all": 30,
-      "weekday": 14,
-      "recent": 4,
-      "historical_score_pct": 2.443
+      "historical_score_pct": 2.885
     },
     {
       "pair": "06-44",
       "all": 39,
-      "weekday": 11,
+      "weekday": 14,
       "recent": 6,
-      "historical_score_pct": 2.409
+      "historical_score_pct": 2.735
     },
     {
-      "pair": "09-36",
-      "all": 24,
-      "weekday": 11,
-      "recent": 6,
-      "historical_score_pct": 2.409
+      "pair": "07-44",
+      "all": 39,
+      "weekday": 16,
+      "recent": 4,
+      "historical_score_pct": 2.657
     },
     {
-      "pair": "12-41",
-      "all": 25,
-      "weekday": 11,
-      "recent": 6,
-      "historical_score_pct": 2.409
-    },
-    {
-      "pair": "08-28",
-      "all": 32,
-      "weekday": 15,
+      "pair": "23-36",
+      "all": 26,
+      "weekday": 17,
       "recent": 3,
-      "historical_score_pct": 2.404
+      "historical_score_pct": 2.618
     },
     {
-      "pair": "10-37",
+      "pair": "30-42",
       "all": 32,
-      "weekday": 15,
+      "weekday": 17,
       "recent": 3,
-      "historical_score_pct": 2.404
+      "historical_score_pct": 2.618
     },
     {
-      "pair": "07-45",
+      "pair": "06-07",
+      "all": 29,
+      "weekday": 18,
+      "recent": 2,
+      "historical_score_pct": 2.579
+    },
+    {
+      "pair": "21-45",
       "all": 31,
-      "weekday": 12,
-      "recent": 5,
-      "historical_score_pct": 2.37
+      "weekday": 15,
+      "recent": 4,
+      "historical_score_pct": 2.546
     },
     {
-      "pair": "31-36",
-      "all": 27,
+      "pair": "29-44",
+      "all": 36,
+      "weekday": 15,
+      "recent": 4,
+      "historical_score_pct": 2.546
+    },
+    {
+      "pair": "22-26",
+      "all": 32,
+      "weekday": 13,
+      "recent": 5,
+      "historical_score_pct": 2.474
+    },
+    {
+      "pair": "06-16",
+      "all": 28,
+      "weekday": 10,
+      "recent": 7,
+      "historical_score_pct": 2.441
+    },
+    {
+      "pair": "03-17",
+      "all": 28,
+      "weekday": 14,
+      "recent": 4,
+      "historical_score_pct": 2.435
+    },
+    {
+      "pair": "22-40",
+      "all": 19,
+      "weekday": 11,
+      "recent": 6,
+      "historical_score_pct": 2.402
+    },
+    {
+      "pair": "05-28",
+      "all": 25,
+      "weekday": 15,
+      "recent": 3,
+      "historical_score_pct": 2.396
+    },
+    {
+      "pair": "18-45",
+      "all": 32,
+      "weekday": 15,
+      "recent": 3,
+      "historical_score_pct": 2.396
+    },
+    {
+      "pair": "03-27",
+      "all": 25,
       "weekday": 12,
       "recent": 5,
-      "historical_score_pct": 2.37
+      "historical_score_pct": 2.363
+    },
+    {
+      "pair": "04-16",
+      "all": 29,
+      "weekday": 12,
+      "recent": 5,
+      "historical_score_pct": 2.363
+    },
+    {
+      "pair": "11-42",
+      "all": 28,
+      "weekday": 12,
+      "recent": 5,
+      "historical_score_pct": 2.363
+    },
+    {
+      "pair": "31-38",
+      "all": 26,
+      "weekday": 12,
+      "recent": 5,
+      "historical_score_pct": 2.363
     },
     {
       "pair": "36-41",
       "all": 30,
       "weekday": 12,
       "recent": 5,
-      "historical_score_pct": 2.37
+      "historical_score_pct": 2.363
+    },
+    {
+      "pair": "36-45",
+      "all": 30,
+      "weekday": 12,
+      "recent": 5,
+      "historical_score_pct": 2.363
     },
     {
       "pair": "35-44",
       "all": 28,
       "weekday": 9,
       "recent": 7,
-      "historical_score_pct": 2.336
+      "historical_score_pct": 2.33
     },
     {
-      "pair": "04-41",
-      "all": 32,
+      "pair": "07-13",
+      "all": 31,
       "weekday": 13,
       "recent": 4,
-      "historical_score_pct": 2.332
+      "historical_score_pct": 2.324
     },
     {
-      "pair": "26-42",
-      "all": 32,
-      "weekday": 13,
-      "recent": 4,
-      "historical_score_pct": 2.332
+      "pair": "03-11",
+      "all": 26,
+      "weekday": 10,
+      "recent": 6,
+      "historical_score_pct": 2.291
     },
     {
-      "pair": "10-21",
+      "pair": "09-36",
+      "all": 24,
+      "weekday": 10,
+      "recent": 6,
+      "historical_score_pct": 2.291
+    },
+    {
+      "pair": "09-44",
+      "all": 29,
+      "weekday": 10,
+      "recent": 6,
+      "historical_score_pct": 2.291
+    },
+    {
+      "pair": "12-31",
+      "all": 21,
+      "weekday": 10,
+      "recent": 6,
+      "historical_score_pct": 2.291
+    },
+    {
+      "pair": "12-41",
+      "all": 25,
+      "weekday": 10,
+      "recent": 6,
+      "historical_score_pct": 2.291
+    },
+    {
+      "pair": "15-33",
+      "all": 28,
+      "weekday": 10,
+      "recent": 6,
+      "historical_score_pct": 2.291
+    },
+    {
+      "pair": "36-43",
       "all": 30,
-      "weekday": 14,
-      "recent": 3,
-      "historical_score_pct": 2.293
-    },
-    {
-      "pair": "11-28",
-      "all": 32,
-      "weekday": 14,
-      "recent": 3,
-      "historical_score_pct": 2.293
-    },
-    {
-      "pair": "16-34",
-      "all": 33,
-      "weekday": 14,
-      "recent": 3,
-      "historical_score_pct": 2.293
+      "weekday": 10,
+      "recent": 6,
+      "historical_score_pct": 2.291
     }
   ],
   "top_sets": [
     {
-      "numbers": "16-20-22-36-41-45",
-      "score": 0.32187
+      "numbers": "06-07-13-16-31-44",
+      "score": 0.329
     },
     {
-      "numbers": "07-16-22-38-41-45",
-      "score": 0.32007
+      "numbers": "01-06-07-16-31-44",
+      "score": 0.32594
     },
     {
-      "numbers": "16-22-31-36-41-45",
-      "score": 0.31972
+      "numbers": "06-07-16-29-31-44",
+      "score": 0.32516
     },
     {
-      "numbers": "12-31-36-41-43-45",
-      "score": 0.31719
+      "numbers": "06-07-16-29-40-44",
+      "score": 0.32228
     },
     {
-      "numbers": "02-31-36-38-41-45",
-      "score": 0.31668
+      "numbers": "06-07-16-28-31-44",
+      "score": 0.32189
     },
     {
-      "numbers": "19-30-36-38-41-45",
-      "score": 0.31583
+      "numbers": "06-07-09-16-31-44",
+      "score": 0.32157
     },
     {
-      "numbers": "10-22-31-36-38-43",
-      "score": 0.31484
+      "numbers": "06-07-09-31-36-44",
+      "score": 0.32124
     },
     {
-      "numbers": "04-13-16-22-25-41",
-      "score": 0.31407
+      "numbers": "06-07-11-16-31-44",
+      "score": 0.32105
     },
     {
-      "numbers": "07-22-31-38-41-45",
-      "score": 0.31342
+      "numbers": "06-07-16-24-31-44",
+      "score": 0.31994
     },
     {
-      "numbers": "16-19-30-36-38-45",
-      "score": 0.31325
+      "numbers": "06-07-16-31-35-44",
+      "score": 0.31974
     }
   ]
 }
